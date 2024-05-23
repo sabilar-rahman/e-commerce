@@ -1,10 +1,10 @@
 
-type TVariant = {
+export type TVariant = {
     type: string;
     value: string;
 };
 
-type TInventory = {
+export type TInventory = {
     quantity: number;
     inStock: boolean;
 };
