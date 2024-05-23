@@ -42,6 +42,28 @@ const getAllProducts = async (req: Request, res: Response) => {
     }
 }
 
+// get single products ---------
+
+const getSingleProducts = async (req: Request, res: Response) => {
+    try {
+
+        const {productId} = req.params;
+        const result = await ProductService.getSingleProductsFromDB(productId)
+
+        // send response to user
+        res.status(200).json({
+            success: true,
+            message: "A sleek and powerful smartphone with cutting-edge features.",
+            data: result
+        })
+
+    } catch (err) {
+        console.log(err);
+
+    }
+}
+
+
 
 
 
@@ -49,5 +71,6 @@ const getAllProducts = async (req: Request, res: Response) => {
 export const ProductController = {
     createProduct,
     getAllProducts,
+    getSingleProducts
 
 }
