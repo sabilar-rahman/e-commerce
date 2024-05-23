@@ -10,6 +10,7 @@ router.post('/',ProductController.createProduct);
 router.get('/',ProductController.getAllProducts);
 
 router.get('/:productId',ProductController.getSingleProducts)
+router.delete('/:productId',ProductController.deleteSingleProducts)
 
 
 export const ProductsRoutes = router;
