@@ -29,6 +29,37 @@ const updateProductInDB = async (_id: string, updatedData: TProduct) => {
 
 
 
+// const searchProductsInDB = async (searchTerm: string) => {
+//     const result = await ProductsModel.find({
+//         $or: [
+//             { name: { $regex: searchTerm, $options: 'i' } },
+//             // { description: { $regex: searchTerm, $options: 'i' } },
+//             // { category: { $regex: searchTerm, $options: 'i' } },
+//             // { 'variants.type': { $regex: searchTerm, $options: 'i' } },
+//             // { 'variants.value': { $regex: searchTerm, $options: 'i' } },
+//         ]
+//     });
+//     return result;
+// }; 
+
+
+
+const searchProductsInDB = async (searchTerm: string) => {
+    const result = await ProductsModel.find({
+        $or: [
+            { name: { $regex: searchTerm, $options: 'i' } },
+            { description: { $regex: searchTerm, $options: 'i' } },
+            { category: { $regex: searchTerm, $options: 'i' } },
+            { 'tags': { $regex: searchTerm, $options: 'i' } }, // Adjusted to search tags
+            { 'variants.type': { $regex: searchTerm, $options: 'i' } },
+            { 'variants.value': { $regex: searchTerm, $options: 'i' } },
+        ]
+    });
+    return result;
+};
+
+
+
 
 
 
@@ -37,7 +68,8 @@ export const ProductService ={
     getAllProductsFromDB,
     getSingleProductsFromDB,
     deleteProductFromDB,
-    updateProductInDB
+    updateProductInDB,
+    searchProductsInDB
 
 
 }
