@@ -7,7 +7,7 @@ router.post('/',OrdersController.createOrder);
 
 router.get('/',OrdersController.getAllOrders);
 
-router.get('/orders?email=',OrdersController.getOrdersByEmail);
+// router.get('/',OrdersController.getOrdersByEmail);
 
 
 

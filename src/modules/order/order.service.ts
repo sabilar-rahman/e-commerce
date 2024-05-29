@@ -7,10 +7,26 @@ const createOrdersIntoDB = async (orders: IOrder) => {
   return result;
 };
 // get orders
-const getOrdersFromDB = async () => {
-  const result = await OrdersModel.find();
-  return result;
-};
+// const getOrdersFromDB = async () => {
+//   const result = await OrdersModel.find();
+//   return result;
+// };
+
+
+//  get order and email same root
+
+const getOrdersFromDB = async(email:string | null)=>{
+  if(email === null){
+    const result = await OrdersModel.find();
+    return result;
+  }
+  else{
+    const result = await OrdersModel.find({email})
+    return result
+  }
+
+}
+
 
 const getOrdersByEmail = async (email: any) => {
   const result = await OrdersModel.find({ email });
