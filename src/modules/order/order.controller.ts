@@ -18,53 +18,67 @@ const createOrder = async (req: Request, res: Response) => {
 };
 
 // get all orders
+// const getAllOrders = async (req: Request, res: Response) => {
+//   try {
+//     const result = await OrdersService.getOrdersFromDB();
+
+//     // send response to user
+//     res.status(200).json({
+//       success: true,
+//       message: "Orders fetched successfully!",
+//       data: result,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+// get order and and email from same route
 const getAllOrders = async (req: Request, res: Response) => {
   try {
-    const result = await OrdersService.getOrdersFromDB();
+    const query = req.query;
+    let result = null
+    const email = query?.email as string;
+    if (Object.keys(query).length === 0) {
+      const result = await OrdersService.getOrdersFromDB(null);
+      if (!result.length) {
+        return res.status(400).json({
+          success: false,
+          message: "Orders Not found",
+          data: result,
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "Orders fetched successfully!",
+        data: result,
+      });
+      
+    } else if (query.email) {
+      const result = await OrdersService.getOrdersFromDB(email)
+      if (result.length) {
+        return res.status(202).json({
+          success: true,
+          message: "Orders fetched successfully for user email!",
+          data: result,
+        });
+       
 
-    // send response to user
-    res.status(200).json({
-      success: true,
-      message: "Orders fetched successfully!",
-      data: result,
-    });
+      } return res.status(400).json({
+          success: false,
+          message: 'Order not found',
+        });
+
+    }
   } catch (err) {
     console.log(err);
   }
-};
 
-
-const getOrdersByEmail = async (req: Request, res: Response) => {
-  const email = req.query.email;
-
-  if (!email) {
-      return res.status(400).json({
-          success: false,
-          message: 'Email query parameter is required'
-      });
-  }
-
-  try {
-      const orders = await OrdersService.getOrdersByEmail(email);
-
-      return res.status(200).json({
-          success: true,
-          message: 'Orders fetched successfully for user email!',
-          data: orders
-      });
-  } catch (err) {
-      console.log(err);
-  }
-};
-
-
-// 
-
-
+}
 
 
 export const OrdersController = {
   createOrder,
   getAllOrders,
-  getOrdersByEmail
-};
+
+}

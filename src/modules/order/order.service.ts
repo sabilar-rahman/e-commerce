@@ -28,13 +28,13 @@ const getOrdersFromDB = async(email:string | null)=>{
 }
 
 
-const getOrdersByEmail = async (email: any) => {
-  const result = await OrdersModel.find({ email });
-  return result;
-};
+// const getOrdersByEmail = async (email: any) => {
+//   const result = await OrdersModel.find({ email });
+//   return result;
+// };
 
 export const OrdersService = {
   createOrdersIntoDB,
   getOrdersFromDB,
-  getOrdersByEmail,
+  // getOrdersByEmail,
 };
