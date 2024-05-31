@@ -27,26 +27,11 @@ const createOrder = async (req: Request, res: Response) => {
 };
 
 // get all orders
-// const getAllOrders = async (req: Request, res: Response) => {
-//   try {
-//     const result = await OrdersService.getOrdersFromDB();
 
-//     // send response to user
-//     res.status(200).json({
-//       success: true,
-//       message: "Orders fetched successfully!",
-//       data: result,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-// get order and and email from same route
 const getAllOrders = async (req: Request, res: Response) => {
   try {
     const query = req.query;
-    let result = null
+    // const result = null
     const email = query?.email as string;
     if (Object.keys(query).length === 0) {
       const result = await OrdersService.getOrdersFromDB(null);
