@@ -18,22 +18,20 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
-app.all('*', (req: Request, res: Response) => {
-  // console.log(req.url);
+app.all("*", (req: Request, res: Response) => {
   res.status(400).json({
     success: false,
-    message: 'Route not found',
+    message: "Route not found",
   });
 });
 
-// global error function
+// global error
 
 app.use((err: Error, req: Request, res: Response) => {
   res.status(400).json({
     success: false,
-    message: err?.message || 'Something went wrong',
+    message: err?.message || "Something went wrong",
   });
 });
-
 
 export default app;

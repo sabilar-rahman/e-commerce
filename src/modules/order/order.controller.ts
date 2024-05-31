@@ -1,10 +1,19 @@
 import { Request, Response } from "express";
 import { OrdersService } from "./order.service";
+import OrderValidationSchema from "./order.zod.validation";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
+
+
     const orders = req.body;
-    const result = await OrdersService.createOrdersIntoDB(orders);
+
+
+    const zodParseOrdersData = OrderValidationSchema.parse(orders)
+
+
+
+    const result = await OrdersService.createOrdersIntoDB(zodParseOrdersData);
 
     // send response to user
     res.status(200).json({

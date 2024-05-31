@@ -5,10 +5,12 @@ import { TInventory, TProduct, TVariant } from "./product.interface";
 const TVariantSchema = new Schema<TVariant>({
     type: {
         type: String,
+        required: true,
         
     },
     value: {
         type: String,
+        required: true,
 
     }
 });
@@ -17,10 +19,12 @@ const TVariantSchema = new Schema<TVariant>({
 const TInventorySchema = new Schema<TInventory>({
     quantity: {
         type: Number,
+        required: true,
 
     },
     inStock: {
         type: Boolean,
+        required: true,
 
     }
 });
@@ -29,18 +33,22 @@ const TInventorySchema = new Schema<TInventory>({
 const TProductSchema = new Schema<TProduct>({
     name: {
         type: String,
+        required: true,
 
     },
     description: {
         type: String,
+        required: true,
 
     },
     price: {
         type: Number,
+        required: true,
 
     },
     category: {
         type: String,
+        required: true,
 
     },
     tags: {
